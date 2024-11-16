@@ -1,51 +1,12 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-
-enum IGender {
-  female = 'female',
-  male = 'male',
-  other = 'other',
-}
-
-enum IPreferences {
-  religion = 'religion',
-  health = 'health',
-  books = 'books',
-  pets = 'pets',
-}
-
-interface IFormInput {
-  name: string;
-  email: string;
-  gender: IGender;
-  password: string;
-  confirmPassword: string;
-  preferences?: IPreferences[];
-}
-
-interface IOptions {
-  label: string;
-  value: string;
-}
-
-const preferencesOptions: IOptions[] = [
-  { label: 'Religião', value: IPreferences.religion },
-  { label: 'Saúde', value: IPreferences.health },
-  { label: 'Livros', value: IPreferences.books },
-  { label: 'Pets', value: IPreferences.pets },
-];
-
-const gendersOptions: IOptions[] = [
-  { label: "Home", value: IGender.male },
-  { label: "Mulher", value: IGender.female },
-  { label: "Outro", value: IGender.other },
-];
+import { IFormInput } from './interfaces';
+import { gendersOptions, preferencesOptions } from './constants';
 
 function App() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log('data: ', data);
 
-  // Verifica se as senhas coincidem
   const password = watch("password");
 
   return (
@@ -55,6 +16,7 @@ function App() {
         id="name"
         type="text"
         placeholder="Digite o seu nome"
+        aria-invalid={errors.name ? "true" : "false"}
         {...register("name", { required: "Nome é obrigatório!" })}
       />
       {errors.name && <span>{errors.name.message}</span>}
@@ -64,6 +26,7 @@ function App() {
         id="email"
         type="email"
         placeholder="Digite o seu e-mail"
+        aria-invalid={errors.email ? "true" : "false"}
         {...register("email", {
           required: true,
           pattern: {
@@ -75,7 +38,10 @@ function App() {
       {errors.email && <span>{errors.email.message}</span>}
 
       <label htmlFor="gender">Selecione o gênero:</label>
-      <select id="gender" {...register("gender", { required: "Gênero é obrigatório!" })}>
+      <select
+        id="gender"
+        aria-invalid={errors.gender ? "true" : "false"}
+        {...register("gender", { required: "Gênero é obrigatório!" })}>
         <option value="">Selecione</option>
 
         {gendersOptions.map(gender => {
@@ -106,6 +72,7 @@ function App() {
         id="password"
         type="password"
         placeholder="Digite a senha"
+        aria-invalid={errors.password ? "true" : "false"}
         {...register("password", {
           required: "Senha é obrigatória!",
           minLength: {
@@ -121,6 +88,7 @@ function App() {
         id="confirmPassword"
         type="password"
         placeholder="Confirme a senha"
+        aria-invalid={errors.confirmPassword ? "true" : "false"}
         {...register("confirmPassword", {
           required: "Confirmação de senha é obrigatória!",
           validate: (value) => value === password || "As senhas não coincidem!",
