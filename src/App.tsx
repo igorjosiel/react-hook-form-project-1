@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="w-full max-w-sm">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
+        <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nome:</label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -26,7 +26,7 @@ function App() {
           {errors.name && <span>{errors.name.message}</span>}
         </div>
 
-        <div className="mb-4">
+        <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">E-mail:</label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -46,18 +46,22 @@ function App() {
           {errors.email && <span>{errors.email.message}</span>}
         </div>
 
-        <label htmlFor="gender">Gênero:</label>
-        <select
-          id="gender"
-          aria-invalid={errors.gender ? "true" : "false"}
-          {...register("gender", { required: "Gênero é obrigatório!" })}>
-          <option value="">Selecione</option>
+        <div className="mb-3">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">Gênero:</label>
+          <select
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="gender"
+            aria-invalid={errors.gender ? "true" : "false"}
+            {...register("gender", { required: "Gênero é obrigatório!" })}>
+            <option value="">Selecione</option>
 
-          {gendersOptions.map(gender => {
-            return <option key={gender.value} value={gender.value}>{gender.label}</option>
-          })}
-        </select>
-        {errors.gender && <span>{errors.gender.message}</span>}
+            {gendersOptions.map(gender => {
+              return <option key={gender.value} value={gender.value}>{gender.label}</option>
+            })}
+          </select>
+
+          {errors.gender && <span>{errors.gender.message}</span>}
+        </div>
 
         <fieldset>
           <legend>Selecione as suas preferências:</legend>
