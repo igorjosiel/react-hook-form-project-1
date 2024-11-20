@@ -117,7 +117,12 @@ function App() {
           {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
         </div>
 
-        <input type="submit" />
+        <div className="flex flex-row justify-end">
+          <input
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
+            type="submit"
+          />
+        </div>
       </form>
     </div>
   );
