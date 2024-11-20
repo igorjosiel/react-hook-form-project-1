@@ -11,9 +11,9 @@ function App() {
 
   return (
     <div className="w-full max-w-sm">
-      <form onSubmit={handleSubmit(onSubmit)} className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Nome:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nome:</label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
@@ -22,27 +22,31 @@ function App() {
             aria-invalid={errors.name ? "true" : "false"}
             {...register("name", { required: "Nome é obrigatório!" })}
           />
-          
+
           {errors.name && <span>{errors.name.message}</span>}
         </div>
 
-        <label htmlFor="email">E-mail:</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="Digite o seu e-mail"
-          aria-invalid={errors.email ? "true" : "false"}
-          {...register("email", {
-            required: true,
-            pattern: {
-              value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
-              message: "E-mail inválido!",
-            }
-          })}
-        />
-        {errors.email && <span>{errors.email.message}</span>}
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">E-mail:</label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            type="email"
+            placeholder="Digite o seu e-mail"
+            aria-invalid={errors.email ? "true" : "false"}
+            {...register("email", {
+              required: true,
+              pattern: {
+                value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
+                message: "E-mail inválido!",
+              }
+            })}
+          />
 
-        <label htmlFor="gender">Selecione o gênero:</label>
+          {errors.email && <span>{errors.email.message}</span>}
+        </div>
+
+        <label htmlFor="gender">Gênero:</label>
         <select
           id="gender"
           aria-invalid={errors.gender ? "true" : "false"}
