@@ -10,7 +10,7 @@ function App() {
   const password = watch("password");
 
   return (
-    <div className="w-full max-w-sm">
+    <div className="w-full max-w-sm my-6">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nome:</label>
@@ -63,21 +63,25 @@ function App() {
           {errors.gender && <span>{errors.gender.message}</span>}
         </div>
 
-        <fieldset>
-          <legend>Selecione as suas preferências:</legend>
-          {preferencesOptions.map(preference => {
-            return (
-              <div key={preference.value}>
-                <label htmlFor={preference.value}>{preference.label}</label>
-                <input
-                  id={preference.value}
-                  type="checkbox"
-                  value={preference.value}
-                  {...register("preferences")}
-                />
-              </div>
-            );
-          })}
+        <fieldset className="mb-3">
+          <legend className="block text-gray-700 text-sm font-bold mb-2">Preferências:</legend>
+
+          <div className="flex gap-5 bg-blue-50 border rounded p-2 shadow leading-tight">
+            {preferencesOptions.map(preference => {
+              return (
+                <div key={preference.value} className="mb-1">
+                  <label className="cursor-pointer" htmlFor={preference.value}>{preference.label}</label>
+                  <input
+                    className="ml-1 cursor-pointer"
+                    id={preference.value}
+                    type="checkbox"
+                    value={preference.value}
+                    {...register("preferences")}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </fieldset>
 
         <div className="mb-3">
