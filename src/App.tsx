@@ -12,6 +12,8 @@ function App() {
   return (
     <div className="w-full max-w-sm my-6">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
+        <h2 className="text-center mb-3 text-xl text-blue-950 font-bold">Cadastro</h2>
+
         <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nome:</label>
           <input
@@ -23,7 +25,7 @@ function App() {
             {...register("name", { required: "Nome é obrigatório!" })}
           />
 
-          {errors.name && <span>{errors.name.message}</span>}
+          {errors.name && <span className="text-red-500 text-sm font-bold">{errors.name.message}</span>}
         </div>
 
         <div className="mb-3">
@@ -43,7 +45,7 @@ function App() {
             })}
           />
 
-          {errors.email && <span>{errors.email.message}</span>}
+          {errors.email && <span className="text-red-500 text-sm font-bold">{errors.email.message}</span>}
         </div>
 
         <div className="mb-3">
@@ -60,7 +62,7 @@ function App() {
             })}
           </select>
 
-          {errors.gender && <span>{errors.gender.message}</span>}
+          {errors.gender && <span className="text-red-500 text-sm font-bold">{errors.gender.message}</span>}
         </div>
 
         <fieldset className="mb-3">
@@ -101,7 +103,7 @@ function App() {
             })}
           />
 
-          {errors.password && <span>{errors.password.message}</span>}
+          {errors.password && <span className="text-red-500 text-sm font-bold">{errors.password.message}</span>}
         </div>
 
         <div className="mb-3">
@@ -118,10 +120,10 @@ function App() {
             })}
           />
 
-          {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
+          {errors.confirmPassword && <span className="text-red-500 text-sm font-bold">{errors.confirmPassword.message}</span>}
         </div>
 
-        <div className="flex flex-row justify-end">
+        <div className="flex flex-row justify-end mt-5">
           <input
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
             type="submit"
