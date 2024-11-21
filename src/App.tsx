@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="w-full max-w-sm my-6">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="text-center mb-3 text-xl text-blue-950 font-bold">Cadastro</h2>
+        <h1 className="text-center mb-3 text-xl text-blue-950 font-bold">Cadastro</h1>
 
         <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nome:</label>
@@ -22,10 +22,13 @@ function App() {
             type="text"
             placeholder="Digite o seu nome"
             aria-invalid={errors.name ? "true" : "false"}
+            aria-describedby="name-error"
             {...register("name", { required: "Nome é obrigatório!" })}
           />
 
-          {errors.name && <span className="text-red-500 text-sm font-bold">{errors.name.message}</span>}
+          {errors.name &&
+            <span className="text-red-500 text-sm font-bold" id="name-error" role="alert" aria-live="assertive">{errors.name.message}</span>
+          }
         </div>
 
         <div className="mb-3">
@@ -36,8 +39,9 @@ function App() {
             type="email"
             placeholder="Digite o seu e-mail"
             aria-invalid={errors.email ? "true" : "false"}
+            aria-describedby="email-error"
             {...register("email", {
-              required: true,
+              required: "E-mail é obrigatório!",
               pattern: {
                 value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
                 message: "E-mail inválido!",
@@ -45,7 +49,9 @@ function App() {
             })}
           />
 
-          {errors.email && <span className="text-red-500 text-sm font-bold">{errors.email.message}</span>}
+          {errors.email &&
+            <span className="text-red-500 text-sm font-bold" id="email-error" role="alert" aria-live="assertive">{errors.email.message}</span>
+          }
         </div>
 
         <div className="mb-3">
@@ -54,6 +60,7 @@ function App() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="gender"
             aria-invalid={errors.gender ? "true" : "false"}
+            aria-describedby="gender-error"
             {...register("gender", { required: "Gênero é obrigatório!" })}>
             <option value="">Selecione</option>
 
@@ -62,7 +69,9 @@ function App() {
             })}
           </select>
 
-          {errors.gender && <span className="text-red-500 text-sm font-bold">{errors.gender.message}</span>}
+          {errors.gender &&
+            <span className="text-red-500 text-sm font-bold" id="gender-error" role="alert" aria-live="assertive">{errors.gender.message}</span>
+          }
         </div>
 
         <fieldset className="mb-3">
@@ -94,6 +103,7 @@ function App() {
             type="password"
             placeholder="Digite a senha"
             aria-invalid={errors.password ? "true" : "false"}
+            aria-describedby="password-error"
             {...register("password", {
               required: "Senha é obrigatória!",
               minLength: {
@@ -103,7 +113,9 @@ function App() {
             })}
           />
 
-          {errors.password && <span className="text-red-500 text-sm font-bold">{errors.password.message}</span>}
+          {errors.password &&
+            <span className="text-red-500 text-sm font-bold" id="password-error" role="alert" aria-live="assertive">{errors.password.message}</span>
+          }
         </div>
 
         <div className="mb-3">
@@ -114,19 +126,23 @@ function App() {
             type="password"
             placeholder="Confirme a senha"
             aria-invalid={errors.confirmPassword ? "true" : "false"}
+            aria-describedby="confirm-password-error"
             {...register("confirmPassword", {
               required: "Confirmação de senha é obrigatória!",
               validate: (value) => value === password || "As senhas não coincidem!",
             })}
           />
 
-          {errors.confirmPassword && <span className="text-red-500 text-sm font-bold">{errors.confirmPassword.message}</span>}
+          {errors.confirmPassword &&
+            <span className="text-red-500 text-sm font-bold" id="confirm-password-error" role="alert" aria-live="assertive">{errors.confirmPassword.message}</span>
+          }
         </div>
 
         <div className="flex flex-row justify-end mt-5">
           <input
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
             type="submit"
+            aria-label="Enviar formulário de cadastro"
           />
         </div>
       </form>
