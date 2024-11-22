@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Title, Label } from './components';
+import { Title, Label, SpanError } from './components';
 import { IFormInput } from './interfaces';
 import { gendersOptions, preferencesOptions } from './constants';
 
@@ -36,9 +36,7 @@ function App() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
-          {errors.name &&
-            <span id="name-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.name.message}</span>
-          }
+          {errors.name && <SpanError id="name-error" message={errors.name.message} />}
         </div>
 
         <div className="mb-3">
@@ -59,9 +57,7 @@ function App() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
-          {errors.email &&
-            <span id="email-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.email.message}</span>
-          }
+          {errors.email && <SpanError id="email-error" message={errors.email.message} />}
         </div>
 
         <div className="mb-3">
@@ -80,9 +76,7 @@ function App() {
             })}
           </select>
 
-          {errors.gender &&
-            <span id="gender-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.gender.message}</span>
-          }
+          {errors.gender && <SpanError id="gender-error" message={errors.gender.message} />}
         </div>
 
         <fieldset className="mb-3">
@@ -124,9 +118,7 @@ function App() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
-          {errors.password &&
-            <span id="password-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.password.message}</span>
-          }
+          {errors.password && <SpanError id="password-error" message={errors.password.message} />}
         </div>
 
         <div className="mb-3">
@@ -144,9 +136,7 @@ function App() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
-          {errors.confirmPassword &&
-            <span id="confirm-password-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.confirmPassword.message}</span>
-          }
+          {errors.confirmPassword && <SpanError id="confirm-password-error" message={errors.confirmPassword.message} />}
         </div>
 
         <div className="flex flex-row justify-end mt-5">
