@@ -28,6 +28,7 @@ function App() {
           <Label htmlFor="name" text="Nome:" />
           <InputField
             id="name"
+            type="text"
             register={register("name", { required: "Nome é obrigatório!" })}
             placeholder="Digite o seu nome"
             error={errors.name}
@@ -39,20 +40,19 @@ function App() {
 
         <div className="mb-3">
           <Label htmlFor="email" text="E-mail:" />
-          <input
+          <InputField
             id="email"
             type="email"
             placeholder="Digite o seu e-mail"
-            aria-invalid={errors.email ? "true" : "false"}
-            aria-describedby="email-error"
-            {...register("email", {
+            error={errors.email}
+            ariaDescribedby="email-error"
+            register={register("email", {
               required: "E-mail é obrigatório!",
               pattern: {
                 value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
                 message: "E-mail inválido!",
               }
             })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
           {errors.email && <SpanError id="email-error" message={errors.email.message} />}
@@ -100,20 +100,19 @@ function App() {
 
         <div className="mb-3">
           <Label htmlFor="password" text="Senha:" />
-          <input
+          <InputField
             id="password"
             type="password"
-            placeholder="Digite a senha"
-            aria-invalid={errors.password ? "true" : "false"}
-            aria-describedby="password-error"
-            {...register("password", {
+            placeholder="Degite a senha"
+            error={errors.password}
+            ariaDescribedby="password-error"
+            register={register("password", {
               required: "Senha é obrigatória!",
               minLength: {
                 value: 6,
                 message: "A senha deve ter no mínimo 6 caracteres!",
               },
             })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
           {errors.password && <SpanError id="password-error" message={errors.password.message} />}
@@ -121,17 +120,16 @@ function App() {
 
         <div className="mb-3">
           <Label htmlFor="confirmPassword" text="Confirmar Senha:" />
-          <input
+          <InputField
             id="confirmPassword"
             type="password"
             placeholder="Confirme a senha"
-            aria-invalid={errors.confirmPassword ? "true" : "false"}
-            aria-describedby="confirm-password-error"
-            {...register("confirmPassword", {
+            error={errors.confirmPassword}
+            ariaDescribedby="confirm-password-error"
+            register={register("confirmPassword", {
               required: "Confirmação de senha é obrigatória!",
               validate: (value) => value === password || "As senhas não coincidem!",
             })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
           {errors.confirmPassword && <SpanError id="confirm-password-error" message={errors.confirmPassword.message} />}
