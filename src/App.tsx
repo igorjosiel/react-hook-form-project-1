@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Title, Label } from './components';
 import { IFormInput } from './interfaces';
 import { gendersOptions, preferencesOptions } from './constants';
-import { Label } from './components';
 
 function App() {
   const [isSubmitting, setIsSubimitting] = useState(false);
@@ -22,7 +22,7 @@ function App() {
   return (
     <div className="w-full max-w-sm my-6">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1 className="text-center mb-3 text-xl text-blue-950 font-bold">Cadastro</h1>
+        <Title text="Cadastro" />
 
         <div className="mb-3">
           <Label htmlFor="name" text="Nome:" />
