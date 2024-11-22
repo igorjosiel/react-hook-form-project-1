@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IFormInput } from './interfaces';
 import { gendersOptions, preferencesOptions } from './constants';
+import { Label } from './components';
 
 function App() {
   const [isSubmitting, setIsSubimitting] = useState(false);
@@ -24,7 +25,7 @@ function App() {
         <h1 className="text-center mb-3 text-xl text-blue-950 font-bold">Cadastro</h1>
 
         <div className="mb-3">
-          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Nome:</label>
+          <Label htmlFor="name" text="Nome:" />
           <input
             id="name"
             type="text"
@@ -41,7 +42,7 @@ function App() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">E-mail:</label>
+          <Label htmlFor="email" text="E-mail:" />
           <input
             id="email"
             type="email"
@@ -64,7 +65,7 @@ function App() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-2">Gênero:</label>
+          <Label htmlFor="gender" text="Gênero:" />
           <select
             id="gender"
             aria-invalid={errors.gender ? "true" : "false"}
@@ -85,7 +86,7 @@ function App() {
         </div>
 
         <fieldset className="mb-3">
-          <legend className="block text-gray-700 text-sm font-bold mb-2">Preferências:</legend>
+          <Label htmlFor="" text="Preferências:" />
 
           <div className="flex gap-5 bg-blue-50 border rounded p-2 shadow leading-tight">
             {preferencesOptions.map(preference => {
@@ -106,7 +107,7 @@ function App() {
         </fieldset>
 
         <div className="mb-3">
-          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Senha:</label>
+          <Label htmlFor="password" text="Senha:" />
           <input
             id="password"
             type="password"
@@ -129,7 +130,7 @@ function App() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="confirmPassword" className="block text-gray-700 text-sm font-bold mb-2">Confirmar Senha:</label>
+          <Label htmlFor="confirmPassword" text="Confirmar Senha:" />
           <input
             id="confirmPassword"
             type="password"
