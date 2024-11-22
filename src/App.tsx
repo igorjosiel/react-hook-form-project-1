@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Title, Label, SpanError } from './components';
+import { Button, Label, SpanError, Title } from './components';
 import { IFormInput } from './interfaces';
 import { gendersOptions, preferencesOptions } from './constants';
 
@@ -140,14 +140,10 @@ function App() {
         </div>
 
         <div className="flex flex-row justify-end mt-5">
-          <input
-            type="submit"
+          <Button
+            value={isSubmitting ? "Enviando..." : "Enviar"}
             disabled={isSubmitting}
-            value={isSubmitting ? 'Enviando...' : 'Enviar'}
-            aria-label="Enviar formulário de cadastro"
-            className={`${
-              isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700 cursor-pointer"
-            } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+            ariaLabel="Enviar formulário de cadastro"
           />
         </div>
       </form>
