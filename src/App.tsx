@@ -1,40 +1,48 @@
+import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { IFormInput } from './interfaces';
 import { gendersOptions, preferencesOptions } from './constants';
 
 function App() {
+  const [isSubmitting, setIsSubimitting] = useState(false);
+
   const { register, handleSubmit, watch, formState: { errors } } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log('data: ', data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    setIsSubimitting(true);
+
+    console.log('data: ', data);
+
+    setTimeout(() => setIsSubimitting(false), 2000);
+  }
 
   const password = watch("password");
 
   return (
     <div className="w-full max-w-sm my-6">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h1 className="text-center mb-3 text-xl text-blue-950 font-bold">Cadastro</h1>
 
         <div className="mb-3">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nome:</label>
+          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Nome:</label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
             placeholder="Digite o seu nome"
             aria-invalid={errors.name ? "true" : "false"}
             aria-describedby="name-error"
             {...register("name", { required: "Nome é obrigatório!" })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
           {errors.name &&
-            <span className="text-red-500 text-sm font-bold" id="name-error" role="alert" aria-live="assertive">{errors.name.message}</span>
+            <span id="name-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.name.message}</span>
           }
         </div>
 
         <div className="mb-3">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">E-mail:</label>
+          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">E-mail:</label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
             placeholder="Digite o seu e-mail"
@@ -47,21 +55,23 @@ function App() {
                 message: "E-mail inválido!",
               }
             })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
           {errors.email &&
-            <span className="text-red-500 text-sm font-bold" id="email-error" role="alert" aria-live="assertive">{errors.email.message}</span>
+            <span id="email-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.email.message}</span>
           }
         </div>
 
         <div className="mb-3">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">Gênero:</label>
+          <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-2">Gênero:</label>
           <select
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="gender"
             aria-invalid={errors.gender ? "true" : "false"}
             aria-describedby="gender-error"
-            {...register("gender", { required: "Gênero é obrigatório!" })}>
+            {...register("gender", { required: "Gênero é obrigatório!" })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          >
             <option value="">Selecione</option>
 
             {gendersOptions.map(gender => {
@@ -70,7 +80,7 @@ function App() {
           </select>
 
           {errors.gender &&
-            <span className="text-red-500 text-sm font-bold" id="gender-error" role="alert" aria-live="assertive">{errors.gender.message}</span>
+            <span id="gender-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.gender.message}</span>
           }
         </div>
 
@@ -81,13 +91,13 @@ function App() {
             {preferencesOptions.map(preference => {
               return (
                 <div key={preference.value} className="mb-1">
-                  <label className="cursor-pointer" htmlFor={preference.value}>{preference.label}</label>
+                  <label htmlFor={preference.value} className="cursor-pointer">{preference.label}</label>
                   <input
-                    className="ml-1 cursor-pointer"
                     id={preference.value}
                     type="checkbox"
                     value={preference.value}
                     {...register("preferences")}
+                    className="ml-1 cursor-pointer"
                   />
                 </div>
               );
@@ -96,9 +106,8 @@ function App() {
         </fieldset>
 
         <div className="mb-3">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Senha:</label>
+          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Senha:</label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
             placeholder="Digite a senha"
@@ -111,17 +120,17 @@ function App() {
                 message: "A senha deve ter no mínimo 6 caracteres!",
               },
             })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
           {errors.password &&
-            <span className="text-red-500 text-sm font-bold" id="password-error" role="alert" aria-live="assertive">{errors.password.message}</span>
+            <span id="password-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.password.message}</span>
           }
         </div>
 
         <div className="mb-3">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">Confirmar Senha:</label>
+          <label htmlFor="confirmPassword" className="block text-gray-700 text-sm font-bold mb-2">Confirmar Senha:</label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="confirmPassword"
             type="password"
             placeholder="Confirme a senha"
@@ -131,18 +140,23 @@ function App() {
               required: "Confirmação de senha é obrigatória!",
               validate: (value) => value === password || "As senhas não coincidem!",
             })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
 
           {errors.confirmPassword &&
-            <span className="text-red-500 text-sm font-bold" id="confirm-password-error" role="alert" aria-live="assertive">{errors.confirmPassword.message}</span>
+            <span id="confirm-password-error" role="alert" aria-live="assertive" className="text-red-500 text-sm font-bold">{errors.confirmPassword.message}</span>
           }
         </div>
 
         <div className="flex flex-row justify-end mt-5">
           <input
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
             type="submit"
+            disabled={isSubmitting}
+            value={isSubmitting ? 'Enviando...' : 'Enviar'}
             aria-label="Enviar formulário de cadastro"
+            className={`${
+              isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700 cursor-pointer"
+            } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
           />
         </div>
       </form>
