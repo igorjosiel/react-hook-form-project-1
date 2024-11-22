@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Button, Label, SpanError, Title } from './components';
+import { Button, InputField, Label, SpanError, Title } from './components';
 import { IFormInput } from './interfaces';
 import { gendersOptions, preferencesOptions } from './constants';
 
@@ -26,16 +26,14 @@ function App() {
 
         <div className="mb-3">
           <Label htmlFor="name" text="Nome:" />
-          <input
+          <InputField
             id="name"
-            type="text"
+            register={register("name", { required: "Nome é obrigatório!" })}
             placeholder="Digite o seu nome"
-            aria-invalid={errors.name ? "true" : "false"}
-            aria-describedby="name-error"
-            {...register("name", { required: "Nome é obrigatório!" })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            error={errors.name}
+            ariaDescribedby="name-error"
           />
-
+          
           {errors.name && <SpanError id="name-error" message={errors.name.message} />}
         </div>
 
