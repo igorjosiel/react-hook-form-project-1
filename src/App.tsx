@@ -6,15 +6,20 @@ import { gendersOptions, preferencesOptions } from './constants';
 
 function App() {
   const [isSubmitting, setIsSubimitting] = useState(false);
+  const [show, setShow] = useState(false);
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     setIsSubimitting(true);
+    setShow(false);
 
     console.log('data: ', data);
 
-    setTimeout(() => setIsSubimitting(false), 2000);
+    setTimeout(() => {
+      setIsSubimitting(false);
+      setShow(true);
+    }, 2000);
   }
 
   const password = watch("password");
@@ -23,6 +28,12 @@ function App() {
     <div className="w-full max-w-sm my-6">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <Title text="Cadastro" />
+
+        {show && (
+          <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300">
+            Formulário validado com sucesso!
+          </div>
+        )}
 
         <div className="mb-3">
           <Label htmlFor="name" text="Nome:" />
